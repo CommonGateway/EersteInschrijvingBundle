@@ -1,6 +1,6 @@
 <?php
 /**
- * The pet store bundle aims at providing an example common gateway plugin
+ * The first registration bundle aims at providing an example common gateway plugin
  *
  * @author  Conduction.nl <info@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
@@ -10,7 +10,7 @@ namespace CommonGateway\PetStoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class PetStoreBundle extends Bundle
+class FirstRegistrationBundle extends Bundle
 {
 
 

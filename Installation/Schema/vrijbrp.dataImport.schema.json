@@ -1,0 +1,28 @@
+{
+    "$id": "https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json",
+    "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+    "version": "0.0.1",
+    "title": "DataImport",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of the form"
+        },
+        "type": {
+            "type": "string",
+            "description": "Type of the form"
+        },
+        "records": {
+            "type": "array",
+            "items": {
+                "$ref": "https://vrijbrp.nl/schemas/vrijbrp.importRecord.schema.json"
+            }
+        }
+    },
+    "required": [
+        "name",
+        "type",
+        "records"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "$id": "https://vrijbrp.nl/schemas/vrijbrp.importRecord.schema.json",
+    "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+    "version": "0.0.1",
+    "title": "ImportRecord",
+    "type": "object",
+    "properties": {
+        "values": {
+            "$ref": "https://vrijbrp.nl/schemas/vrijbrp.eersteInschrijving.schema.json"
+        },
+        "documents": {
+            "type": "array",
+            "items": {
+                "$ref": "https://vrijbrp.nl/schemas/vrijbrp.document.schema.json"
+            }
+        }
+    },
+    "required": [
+        "values"
+    ]
+}
