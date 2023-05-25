@@ -1,7 +1,7 @@
 {
     "$id": "https://vrijbrp.nl/schemas/vrijbrp.eersteInschrijving.schema.json",
-    "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "version": "0.2",
+    "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+    "version": "0.0.1",
     "title": "EersteInschrijving",
     "type": "object",
     "properties": {

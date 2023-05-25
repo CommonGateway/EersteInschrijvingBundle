@@ -44,7 +44,7 @@ class FirstRegistrationHandler implements ActionHandlerInterface
     {
         return [
             '$id'         => 'https://vrijbrp.nl/vrijbrp.zaak.handler.json',
-            '$schema'     => 'https://json-schema.org/draft/2020-12/schema',
+            '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
             'title'       => 'VrijbrpEersteInschrijvingHandler',
             'description' => 'This handler syncs EersteInschrijving to VrijBrp',
             'required'    => [
