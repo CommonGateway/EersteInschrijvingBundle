@@ -1,0 +1,102 @@
+{
+    "$id": "https://vrijbrp.nl/schemas/vrijbrp.eersteInschrijving.schema.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "version": "0.2",
+    "title": "EersteInschrijving",
+    "type": "object",
+    "properties": {
+        "referentienummer": {
+            "type": "string",
+            "description": "Referentienummer"
+        },
+        "geslacht": {
+            "type": "string",
+            "description": "Geslacht",
+            "enum": [
+                "V",
+                "M"
+            ]
+        },
+        "voornamen": {
+            "type": "string",
+            "description": "Voornamen"
+        },
+        "voorvoegsel": {
+            "type": "string",
+            "description": "Voorvoegsel/tussenvoegsel"
+        },
+        "achternaam": {
+            "type": "string",
+            "description": "Achternaam"
+        },
+        "geboortedatum": {
+            "type": "string",
+            "description": "Geboortedatum"
+        },
+        "geboorteplaats": {
+            "type": "string",
+            "description": "Geboorteplaats"
+        },
+        "geboorteland": {
+            "type": "string",
+            "description": "Geboorteland"
+        },
+        "land van vorig adres": {
+            "type": "string",
+            "description": "Land van vorig adres"
+        },
+        "e-mail": {
+            "type": "string",
+            "description": "E-mail adres"
+        },
+        "telefoon": {
+            "type": "string",
+            "description": "Telefoonnummer"
+        },
+        "postcode": {
+            "type": "string",
+            "description": "Postcode (nieuw adres)"
+        },
+        "huisnummer": {
+            "type": "string",
+            "description": "Huisnummer (nieuw adres)"
+        },
+        "huisletter": {
+            "type": "string",
+            "description": "Huisletter (nieuw adres)"
+        },
+        "toevoeging": {
+            "type": "string",
+            "description": "Huisnummertoevoeging (nieuw adres)"
+        },
+        "straatnaam": {
+            "type": "string",
+            "description": "Straatnaam (nieuw adres)"
+        },
+        "woonplaats": {
+            "type": "string",
+            "description": "Woonplaats (nieuw adres)"
+        },
+        "datum ingang bewoning": {
+            "type": "string",
+            "description": "Datum ingang bewoning"
+        },
+        "opmerkingen": {
+            "type": "string",
+            "description": "Opmerkingen bij nieuw adres)"
+        }
+    },
+    "required": [
+        "geslacht",
+        "voornamen",
+        "achternaam",
+        "geboortedatum",
+        "geboorteplaats",
+        "geboorteland",
+        "e-mail",
+        "postcode",
+        "huisnummer",
+        "straatnaam",
+        "woonplaats"
+    ]
+}

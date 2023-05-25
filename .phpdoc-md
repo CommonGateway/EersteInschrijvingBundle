@@ -4,7 +4,7 @@ return (object)[
     'destDirectory' => 'docs/classes',
     'format' => 'github',
     'classes' => [
-        '\CommonGateway\PetStoreBundle\Service\InstallationService',
-        '\CommonGateway\PetStoreBundle\Service\PetStoreService'
+        '\CommonGateway\EersteInschrijvingBundle\Service\InstallationService',
+        '\CommonGateway\EersteInschrijvingBundle\Service\FirstRegistrationService'
     ],
 ];
