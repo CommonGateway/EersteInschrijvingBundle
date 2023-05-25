@@ -47,16 +47,20 @@ class FirstRegistrationHandler implements ActionHandlerInterface
             '$schema'     => 'https://json-schema.org/draft/2020-12/schema',
             'title'       => 'VrijbrpEersteInschrijvingHandler',
             'description' => 'This handler syncs EersteInschrijving to VrijBrp',
-            'required'    => ['source', 'location', 'zaakEntity'],
+            'required'    => [
+                'source',
+                'location',
+                'zaakEntity',
+            ],
             'properties'  => [
-                'source' => [
+                'source'                => [
                     'type'        => 'string',
                     'description' => 'The location of the Source we will send a request to, location of an existing Source object',
                     'example'     => 'https://vrijbrp.nl/dossiers',
                     'required'    => true,
                     '$ref'        => 'https://commongroundgateway.nl/commongroundgateway.gateway.entity.json',
                 ],
-                'location' => [
+                'location'              => [
                     'type'        => 'string',
                     'description' => 'The endpoint we will use on the Source to send a request, just a string',
                     'example'     => '/api/births',
@@ -71,6 +75,7 @@ class FirstRegistrationHandler implements ActionHandlerInterface
                 ],
             ],
         ];
+
     }//end getConfiguration()
 
 
