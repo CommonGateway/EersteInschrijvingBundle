@@ -63,27 +63,6 @@ class FirstRegistrationService
 
     }//end __construct()
 
-
-    // **
-    // * An example handler that is triggered by an action.
-    // *
-    // * @param array $data          The data array
-    // * @param array $configuration The configuration array
-    // *
-    // * @return array A handler must ALWAYS return an array
-    // */
-    // public function firstRegistrationHandler(array $data, array $configuration): array
-    // {
-    // $this->data          = $data;
-    // $this->configuration = $configuration;
-    //
-    // $this->logger->debug("FirstRegistrationService -> firstRegistrationHandler()");
-    //
-    // return ['response' => 'Hello. Your EersteInschrijvingBundle works'];
-    //
-    // }//end petStoreHandler()
-
-
     /**
      * Recursively removes self parameters from object.
      *
