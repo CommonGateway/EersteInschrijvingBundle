@@ -63,6 +63,7 @@ class FirstRegistrationService
 
     }//end __construct()
 
+
     /**
      * Recursively removes self parameters from object.
      *
