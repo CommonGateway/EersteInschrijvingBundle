@@ -1,53 +1,24 @@
 {
     "installationService": "CommonGateway\\EersteInschrijvingBundle\\Service\\InstallationService",
     "actions": {
-        "handlers": []
+        "handlers": [
+            {
+                "reference": "https://vrijbrp.nl/action/vrijbrp.firstRegistration.action.json",
+                "actionHandler": "CommonGateway\\EersteInschrijvingBundle\\ActionHandler\\FirstRegistrationHandler",
+                "listens": [
+                    "vrijbrp.registration.created"
+                ],
+                "version": "0.0.1"
+            }
+        ]
     },
     "endpoints": {
-        "multipleSchemas": [
-            {
-                "$id": "https://example.com/EntitiesEndpoint/search.endpoint.json",
-                "version": "0.0.1",
-                "name": "Search",
-                "description": "Generic Search Endpoint. This is an example of an Endpoint using multiple schemas, this way it is possible to get data of multiple schemas.",
-                "schemas": [
-                    "https://example.com/example.schema.json",
-                    "https://example.com/schema/relationExample.schema.json"
-                ],
-                "path": ["search"],
-                "pathRegex": "^(search)$",
-                "methods": ["GET"]
-            }
-        ],
         "schemas": [
             {
-                "reference": "https://example.com/example.schema.json",
-                "description": "An example for the following endpoint: /api/examples. methods: [] stands for 'All methods are allowed'. This endpoint also has 2 sub endpoint examples, a subSchemaEndpoint and a subEndpoint.",
-                "path": "examples",
+                "reference": "https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json",
+                "path": "eerste_inschrijving",
                 "methods": [],
-                "subSchemaEndpoints": [
-                    {
-                        "reference": "https://example.com/schema/relationExample.schema.json",
-                        "description": "An example for the following endpoint: /api/examples/{example-uuid}/relationexamples",
-                        "path": "relationexamples",
-                        "methods": ["GET", "DELETE"],
-                        "throws": ["ps.example.relationexamples"]
-                    }
-                ],
-                "subEndpoints": [
-                    {
-                        "description": "An example for the following endpoint: PUT /api/examples/publish.",
-                        "path": "publish",
-                        "methods": ["PUT"],
-                        "throws": ["ps.example.publish"]
-                    }
-                ]
-            },
-            {
-                "reference": "https://example.com/schema/relationExample.schema.json",
-                "description": "An example for the following endpoint: /api/relationexamples. This is the most common way of creating an Endpoint for a Schema. But in this specific example we only allow the GET and DELETE calls.",
-                "path": "relationexamples",
-                "methods": ["GET", "DELETE"]
+                "throws": ["vrijbrp.registration.created"]
             }
         ]
     }
