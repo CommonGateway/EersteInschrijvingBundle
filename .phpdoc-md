@@ -1,6 +1,6 @@
 <?php
 return (object)[
-    'rootNamespace' => 'CommonGateway\PetStoreBundle',
+    'rootNamespace' => 'CommonGateway\EersteInschrijvingBundle',
     'destDirectory' => 'docs/classes',
     'format' => 'github',
     'classes' => [
