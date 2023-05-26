@@ -8,9 +8,11 @@
 
 namespace CommonGateway\FirstRegistrationBundle\Service;
 
+use CommonGateway\GeboorteVrijBRPBundle\Service\ZgwToVrijbrpService;
 use Doctrine\ORM\EntityManagerInterface;
 use CommonGateway\CoreBundle\Service\GatewayResourceService;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class FirstRegistrationService
 {
@@ -38,6 +40,13 @@ class FirstRegistrationService
     private GatewayResourceService $resourceService;
 
     /**
+     * The ZGW To VrijBRP service.
+     *
+     * @var ZgwToVrijbrpService $zgwToVrijbrpService
+     */
+    private ZgwToVrijbrpService $zgwToVrijbrpService;
+
+    /**
      * The plugin logger.
      *
      * @var LoggerInterface
@@ -46,20 +55,23 @@ class FirstRegistrationService
 
 
     /**
-     * @param EntityManagerInterface $entityManager   The Entity Manager.
-     * @param GatewayResourceService $resourceService The Gateway Resource Service.
-     * @param LoggerInterface        $pluginLogger    The plugin version of the logger interface.
+     * @param EntityManagerInterface $entityManager       The Entity Manager.
+     * @param GatewayResourceService $resourceService     The Gateway Resource Service.
+     * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
+     * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         GatewayResourceService $resourceService,
+        ZgwToVrijbrpService $zgwToVrijbrpService,
         LoggerInterface $pluginLogger
     ) {
-        $this->entityManager   = $entityManager;
-        $this->resourceService = $resourceService;
-        $this->logger          = $pluginLogger;
-        $this->configuration   = [];
-        $this->data            = [];
+        $this->entityManager       = $entityManager;
+        $this->resourceService     = $resourceService;
+        $this->zgwToVrijbrpService = $zgwToVrijbrpService;
+        $this->logger              = $pluginLogger;
+        $this->configuration       = [];
+        $this->data                = [];
 
     }//end __construct()
 
@@ -102,8 +114,8 @@ class FirstRegistrationService
         $this->configuration = $configuration;
         $this->data          = $data;
 
-        $source                = $this->resourceService->getSource($this->configuration['source'], 'common-gateway/first-registration-bundle');
-        $synchronizationEntity = $this->resourceService->getSchema($this->configuration['synchronizationEntity'], 'common-gateway/first-registration-bundle');
+        $source                = $this->resourceService->getSource('https://vrijbrp.nl/source/vrijbrp.dossiers.source.json', 'common-gateway/first-registration-bundle');
+        $synchronizationEntity = $this->resourceService->getSchema('https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json', 'common-gateway/first-registration-bundle');
 
         if ($source === null
             || $synchronizationEntity === null
@@ -111,7 +123,8 @@ class FirstRegistrationService
             return [];
         }
 
-        $dataId = $this->data['response']->_id;
+        $content = \Safe\json_decode($this->data['response']->getContent(), true);
+        $dataId  = $content['_self']['id'];
 
         $object = $this->entityManager->getRepository('App:ObjectEntity')->find($dataId);
         $this->logger->debug("EersteInschrijving Object with id $dataId was created");
@@ -129,10 +142,10 @@ class FirstRegistrationService
         // Todo: temp way of doing this without updated synchronize() function...
         if ($data = $this->zgwToVrijbrpService->synchronizeTemp($synchronization, $objectArray, $this->configuration['location'])) {
             // Return empty array on error for when we got here through a command.
-            return ['response' => $data];
+            return ['response' => new Response(\Safe\json_encode($data), 201, ['content-type' => 'application/json'])];
         }
 
-        return $data;
+        return $this->data;
 
     }//end firstRegistrationHandler()
 
