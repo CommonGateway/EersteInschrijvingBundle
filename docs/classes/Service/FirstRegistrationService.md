@@ -1,33 +1,20 @@
-# CommonGateway\FirstRegistrationBundle\Service\FirstRegistrationService  
-
-
-
-
-
-
+# CommonGateway\FirstRegistrationBundle\Service\FirstRegistrationService
 
 ## Methods
 
 | Name | Description |
 |------|-------------|
-|[__construct](#firstregistrationservice__construct)||
+|[\_\_construct](#firstregistrationservice__construct)||
 |[firstRegistrationHandler](#firstregistrationservicefirstregistrationhandler)|A first registration handler that is triggered by an action.|
 |[removeSelf](#firstregistrationserviceremoveself)|Recursively removes self parameters from object.|
 
-
-
-
-### FirstRegistrationService::__construct  
+### FirstRegistrationService::\_\_construct
 
 **Description**
 
 ```php
  __construct (void)
 ```
-
- 
-
- 
 
 **Parameters**
 
@@ -37,11 +24,9 @@
 
 `void`
 
-
 <hr />
 
-
-### FirstRegistrationService::firstRegistrationHandler  
+### FirstRegistrationService::firstRegistrationHandler
 
 **Description**
 
@@ -49,16 +34,14 @@
 public firstRegistrationHandler (array $data, array $configuration)
 ```
 
-A first registration handler that is triggered by an action. 
-
- 
+A first registration handler that is triggered by an action.
 
 **Parameters**
 
-* `(array) $data`
-: The data array  
-* `(array) $configuration`
-: The configuration array  
+*   `(array) $data`
+    : The data array
+*   `(array) $configuration`
+    : The configuration array
 
 **Return Values**
 
@@ -66,11 +49,9 @@ A first registration handler that is triggered by an action.
 
 > A handler must ALWAYS return an array
 
-
 <hr />
 
-
-### FirstRegistrationService::removeSelf  
+### FirstRegistrationService::removeSelf
 
 **Description**
 
@@ -78,14 +59,12 @@ A first registration handler that is triggered by an action.
 public removeSelf (array $object)
 ```
 
-Recursively removes self parameters from object. 
-
- 
+Recursively removes self parameters from object.
 
 **Parameters**
 
-* `(array) $object`
-: The object to remove self parameters from.  
+*   `(array) $object`
+    : The object to remove self parameters from.
 
 **Return Values**
 
@@ -93,6 +72,4 @@ Recursively removes self parameters from object.
 
 > The cleaned object.
 
-
 <hr />
-
