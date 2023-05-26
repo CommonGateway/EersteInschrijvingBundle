@@ -1,4 +1,4 @@
-# CommonGateway\PetStoreBundle
+# CommonGateway\EersteInschrijvingBundle
 
-* [CommonGateway\EersteInschrijvingBundle\Service\InstallationService](CommonGateway/EersteInschrijvingBundle/Service/InstallationService.md) 
-* [CommonGateway\EersteInschrijvingBundle\Service\FirstRegistrationService](CommonGateway/EersteInschrijvingBundle/Service/FirstRegistrationService.md) 
+* [Service\InstallationService](Service/InstallationService.md) 
+* [Service\FirstRegistrationService](Service/FirstRegistrationService.md) 
