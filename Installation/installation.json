@@ -8,7 +8,18 @@
                 "listens": [
                     "vrijbrp.registration.created"
                 ],
-                "version": "0.0.1"
+                "conditions": {
+                  "==": [
+                    {
+                      "var": "method"
+                    },
+                    "POST"
+                  ]
+                },
+                "configuration": {
+                  "location": "/api/v1/dataimport/add"
+                },
+                "version": "0.0.2"
             }
         ]
     },
