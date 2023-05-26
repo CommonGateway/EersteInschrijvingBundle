@@ -55,10 +55,10 @@ class FirstRegistrationService
 
 
     /**
-     * @param EntityManagerInterface $entityManager   The Entity Manager.
-     * @param GatewayResourceService $resourceService The Gateway Resource Service.
+     * @param EntityManagerInterface $entityManager       The Entity Manager.
+     * @param GatewayResourceService $resourceService     The Gateway Resource Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
-     * @param LoggerInterface        $pluginLogger    The plugin version of the logger interface.
+     * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -66,12 +66,12 @@ class FirstRegistrationService
         ZgwToVrijbrpService $zgwToVrijbrpService,
         LoggerInterface $pluginLogger
     ) {
-        $this->entityManager   = $entityManager;
-        $this->resourceService = $resourceService;
+        $this->entityManager       = $entityManager;
+        $this->resourceService     = $resourceService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
-        $this->logger          = $pluginLogger;
-        $this->configuration   = [];
-        $this->data            = [];
+        $this->logger              = $pluginLogger;
+        $this->configuration       = [];
+        $this->data                = [];
 
     }//end __construct()
 
@@ -124,7 +124,7 @@ class FirstRegistrationService
         }
 
         $content = \Safe\json_decode($this->data['response']->getContent(), true);
-        $dataId = $content['_self']['id'];
+        $dataId  = $content['_self']['id'];
 
         $object = $this->entityManager->getRepository('App:ObjectEntity')->find($dataId);
         $this->logger->debug("EersteInschrijving Object with id $dataId was created");
@@ -142,7 +142,6 @@ class FirstRegistrationService
         // Todo: temp way of doing this without updated synchronize() function...
         if ($data = $this->zgwToVrijbrpService->synchronizeTemp($synchronization, $objectArray, $this->configuration['location'])) {
             // Return empty array on error for when we got here through a command.
-
             return ['response' => new Response(\Safe\json_encode($data), 201, ['content-type' => 'application/json'])];
         }
 
