@@ -1,10 +1,10 @@
 {
-    "installationService": "CommonGateway\\EersteInschrijvingBundle\\Service\\InstallationService",
+    "installationService": "CommonGateway\\FirstRegistrationBundle\\Service\\InstallationService",
     "actions": {
         "handlers": [
             {
                 "reference": "https://vrijbrp.nl/action/vrijbrp.firstRegistration.action.json",
-                "actionHandler": "CommonGateway\\EersteInschrijvingBundle\\ActionHandler\\FirstRegistrationHandler",
+                "actionHandler": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\FirstRegistrationHandler",
                 "listens": [
                     "vrijbrp.registration.created"
                 ],
