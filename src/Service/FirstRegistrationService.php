@@ -6,7 +6,7 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\EersteInschrijvingBundle\Service;
+namespace CommonGateway\FirstRegistrationBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use CommonGateway\CoreBundle\Service\GatewayResourceService;

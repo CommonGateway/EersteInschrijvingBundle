@@ -1,4 +1,4 @@
-# CommonGateway\FirstRegistrationBundle\Service\InstallationService
+# CommonGateway\EersteInschrijvingBundle\Service\InstallationService
 
 ## Implements:
 
