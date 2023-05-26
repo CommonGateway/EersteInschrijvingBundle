@@ -6,10 +6,10 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\EersteInschrijvingBundle\ActionHandler;
+namespace CommonGateway\FirstRegistrationBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\EersteInschrijvingBundle\Service\FirstRegistrationService;
+use CommonGateway\FirstRegistrationBundle\Service\FirstRegistrationService;
 
 
 class FirstRegistrationHandler implements ActionHandlerInterface

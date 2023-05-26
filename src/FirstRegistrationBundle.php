@@ -6,7 +6,7 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\EersteInschrijvingBundle;
+namespace CommonGateway\FirstRegistrationBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

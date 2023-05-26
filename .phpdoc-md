@@ -1,10 +1,10 @@
 <?php
 return (object)[
-    'rootNamespace' => 'CommonGateway\EersteInschrijvingBundle',
+    'rootNamespace' => 'CommonGateway\FirstRegistrationBundle',
     'destDirectory' => 'docs/classes',
     'format' => 'github',
     'classes' => [
-        '\CommonGateway\EersteInschrijvingBundle\Service\InstallationService',
-        '\CommonGateway\EersteInschrijvingBundle\Service\FirstRegistrationService'
+        '\CommonGateway\FirstRegistrationBundle\Service\InstallationService',
+        '\CommonGateway\FirstRegistrationBundle\Service\FirstRegistrationService'
     ],
 ];
