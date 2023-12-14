@@ -38,10 +38,10 @@ A first registration handler that is triggered by an action.
 
 **Parameters**
 
-*   `(array) $data`
-    : The data array
-*   `(array) $configuration`
-    : The configuration array
+* `(array) $data`
+  : The data array
+* `(array) $configuration`
+  : The configuration array
 
 **Return Values**
 
@@ -63,8 +63,8 @@ Recursively removes self parameters from object.
 
 **Parameters**
 
-*   `(array) $object`
-    : The object to remove self parameters from.
+* `(array) $object`
+  : The object to remove self parameters from.
 
 **Return Values**
 
