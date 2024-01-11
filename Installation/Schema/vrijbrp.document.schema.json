@@ -1,21 +1,24 @@
 {
     "$id": "https://vrijbrp.nl/schemas/vrijbrp.document.schema.json",
     "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
-    "version": "0.2",
+    "version": "0.3",
     "title": "Document",
     "type": "object",
     "properties": {
         "title": {
             "type": "string",
-            "description": "Titel van het document"
+            "description": "Titel van het document",
+            "required": true
         },
         "filename": {
             "type": "string",
-            "description": "Bestandsnaam"
+            "description": "Bestandsnaam",
+            "required": true
         },
         "content": {
             "type": "string",
-            "description": "Base64 gecodeerde bestandsinhoud"
+            "description": "Base64 gecodeerde bestandsinhoud",
+            "required": true
         }
     },
     "required": [
