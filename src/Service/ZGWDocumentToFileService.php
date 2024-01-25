@@ -86,10 +86,10 @@ class ZGWDocumentToFileService
 
     /**
      * @param EntityManagerInterface $entityManager       The Entity Manager.
-     * @param ParameterBagInterface $parameterBag The Parameter Bag Interface
+     * @param ParameterBagInterface  $parameterBag        The Parameter Bag Interface
      * @param GatewayResourceService $resourceService     The Gateway Resource Service.
-     * @param MappingService $mappingService The Mapping Service
-     * @param SynchronizationService $syncService The Synchronization Service.
+     * @param MappingService         $mappingService      The Mapping Service
+     * @param SynchronizationService $syncService         The Synchronization Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
      * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
@@ -103,16 +103,17 @@ class ZGWDocumentToFileService
         LoggerInterface $pluginLogger
     ) {
         $this->entityManager       = $entityManager;
-        $this->parameterBag = $parameterBag;
+        $this->parameterBag        = $parameterBag;
         $this->resourceService     = $resourceService;
-        $this->mappingService = $mappingService;
-        $this->syncService = $syncService;
+        $this->mappingService      = $mappingService;
+        $this->syncService         = $syncService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
         $this->logger              = $pluginLogger;
         $this->configuration       = [];
         $this->data                = [];
 
     }//end __construct()
+
 
     /**
      * Generates the content for a new file part.
@@ -134,6 +135,7 @@ class ZGWDocumentToFileService
         ];
 
     }//end createFilePart()
+
 
     /**
      * Generates a download endpoint from the id of an 'Enkelvoudig Informatie Object' and the endpoint for downloads.
@@ -159,6 +161,7 @@ class ZGWDocumentToFileService
 
     }//end generateDownloadEndpoint()
 
+
     /**
      * Creates or updates a file associated with a given ObjectEntity instance.
      *
@@ -168,8 +171,8 @@ class ZGWDocumentToFileService
      * It also sets the response data based on the method used (POST or other)
      * and if the `$setResponse` parameter is set to `true`.
      *
-     * @param ObjectEntity $objectEntity     The object entity associated with the file.
-     * @param array        $data             Data associated with the file such as title, format, and content.
+     * @param ObjectEntity $objectEntity The object entity associated with the file.
+     * @param array        $data         Data associated with the file such as title, format, and content.
      *
      * @return void
      */
@@ -191,7 +194,9 @@ class ZGWDocumentToFileService
         $file->setSize(0);
 
         return $file;
-    }
+
+    }//end createFile()
+
 
     /**
      * Creates or updates a file associated with a given ObjectEntity instance.
@@ -251,7 +256,9 @@ class ZGWDocumentToFileService
                 ['content-type' => 'application/json']
             );
         }
-    }
+
+    }//end getFilePart()
+
 
     /**
      * Creates or updates a file associated with a given ObjectEntity instance.
@@ -276,7 +283,6 @@ class ZGWDocumentToFileService
             $file = $objectEntity->getValueObject('inhoud')->getFiles()->first();
         }
 
-
         if ($objectEntity->getValueObject('inhoud') !== false && $objectEntity->getValueObject('inhoud')->getFiles()->count() === 0) {
             // Create the file with the data.
             $file = $this->createFile($objectEntity, $data);
@@ -288,13 +294,11 @@ class ZGWDocumentToFileService
         }
 
         if ((($data['inhoud'] === null || filter_var($data['inhoud'], FILTER_VALIDATE_URL) === $data['inhoud'])
-                && ($data['link'] === null || $data['link'] === ''))
+            && ($data['link'] === null || $data['link'] === ''))
             && isset($this->data['body']['bestandsomvang']) === true
         ) {
-
             // Creates a file part for the file.
             $this->getFilePart($objectEntity, $data, $downloadEndpoint, $setResponse);
-
         }//end if
 
         $file->setValue($objectEntity->getValueObject('inhoud'));
@@ -332,7 +336,7 @@ class ZGWDocumentToFileService
         $response = $this->data['objects']['document'];
 
         // Get the zaak object.
-        $document = $this->entityManager->getRepository('App:ObjectEntity')->find($response['_self']['id']);
+        $document         = $this->entityManager->getRepository('App:ObjectEntity')->find($response['_self']['id']);
         $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json']);
         if ($document instanceof ObjectEntity === false || $downloadEndpoint instanceof Endpoint === false) {
             return $this->data;
@@ -342,7 +346,8 @@ class ZGWDocumentToFileService
         $this->createOrUpdateFile($informatieobject, $informatieobject->toArray(), $downloadEndpoint, false);
 
         return $this->data;
-    }//end firstRegistrationHandler
+
+    }//end zgwDocumentToFileHandler()
 
 
 }//end class
