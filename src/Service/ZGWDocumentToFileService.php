@@ -337,7 +337,7 @@ class ZGWDocumentToFileService
 
         // Get the zaak object.
         $document         = $this->entityManager->getRepository('App:ObjectEntity')->find($response['_self']['id']);
-        $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json']);
+        $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => $this->configuration['endpoint']]);
         if ($document instanceof ObjectEntity === false || $downloadEndpoint instanceof Endpoint === false) {
             return $this->data;
         }

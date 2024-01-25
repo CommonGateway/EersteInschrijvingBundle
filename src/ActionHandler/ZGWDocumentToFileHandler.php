@@ -47,53 +47,15 @@ class ZGWDocumentToFileHandler implements ActionHandlerInterface
             '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
             'title'       => 'ZGWDocumentToFileHandler',
             'description' => 'This handler syncs EersteInschrijving to VrijBrp',
-            'required'    => [
-                'source',
-                'location',
-                'zaakEntity',
-            ],
+            'required'    => ['endpoint'],
             'properties'  => [
-                'source'           => [
+                'endpoint'         => [
                     'type'        => 'string',
-                    'description' => 'The location of the Source we will send a request to, location of an existing Source object',
-                    'example'     => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
+                    'description' => 'The endpoint we will use for the download url.',
+                    'example'     => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json',
                     'required'    => true,
-                    '$ref'        => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
-                ],
-                'location'         => [
-                    'type'        => 'string',
-                    'description' => 'The endpoint we will use on the Source to send a request, just a string',
-                    'example'     => '/api/births',
-                    'required'    => true,
-                ],
-                'schema'           => [
-                    'type'        => 'string',
-                    'description' => 'The reference of the entity we use as trigger for this handler, we need this to find a synchronization object',
-                    'example'     => 'https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json',
-                    'required'    => true,
-                    '$ref'        => 'https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json',
-                ],
-                'documentSchema'   => [
-                    'type'        => 'string',
-                    'description' => 'The reference of the entity we use as trigger for this handler, we need this to find a synchronization object',
-                    'example'     => 'https://vrijbrp.nl/schemas/vrijbrp.document.schema.json',
-                    'required'    => true,
-                    '$ref'        => 'https://vrijbrp.nl/schemas/vrijbrp.document.schema.json',
-                ],
-                'valuesMapping'    => [
-                    'type'        => 'string',
-                    'description' => 'The reference of the mapping we use as trigger for this handler.',
-                    'example'     => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakEigenschapToFirstRegistration.mapping.json',
-                    'required'    => true,
-                    '$ref'        => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakEigenschapToFirstRegistration.mapping.json',
-                ],
-                'documentsMapping' => [
-                    'type'        => 'string',
-                    'description' => 'The reference of the mapping we use as trigger for this handler.',
-                    'example'     => '',
-                    'required'    => true,
-                    '$ref'        => '',
-                ],
+                    '$ref'        => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json'
+                ]
             ],
         ];
 
