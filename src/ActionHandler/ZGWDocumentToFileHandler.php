@@ -49,13 +49,13 @@ class ZGWDocumentToFileHandler implements ActionHandlerInterface
             'description' => 'This handler syncs EersteInschrijving to VrijBrp',
             'required'    => ['endpoint'],
             'properties'  => [
-                'endpoint'         => [
+                'endpoint' => [
                     'type'        => 'string',
                     'description' => 'The endpoint we will use for the download url.',
                     'example'     => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json',
                     'required'    => true,
-                    '$ref'        => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json'
-                ]
+                    '$ref'        => 'https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json',
+                ],
             ],
         ];
 
