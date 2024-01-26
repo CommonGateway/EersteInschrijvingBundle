@@ -1,0 +1,51 @@
+{
+  "title": "ZDSToZGWToFirstRegistration",
+  "$id": "https://vrijbrp.nl/action/vrijbrp.ZDSToZGWToFirstRegistration.action.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Action.schema.json",
+  "version": "0.0.2",
+  "listens": [
+    "zgw.file.created"
+  ],
+  "throws": [],
+  "conditions": {
+    "and": [
+      {
+        "==": [
+          {
+            "var": "documents.0.informatieobject.informatieobjecttype.omschrijving"
+          },
+          "Aanvraag"
+        ]
+      },
+      {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "documents.0.zaak.zaaktype.identificatie"
+              },
+              "B333"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "documents.0.zaak.zaaktype.identificatie"
+              },
+              "B334"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "class": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\ZGWToFirstRegistrationHandler",
+  "configuration": {
+    "location": "/api/v1/dataimport/add",
+    "source": "https://vrijbrp.nl/source/vrijbrp.dossiers.source.json",
+    "schema": "https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json",
+    "documentSchema": "https://vrijbrp.nl/schemas/vrijbrp.document.schema.json",
+    "valuesMapping": "https://vrijbrp.nl/mapping/vrijbrp.zgwZaakToFirstRegistration.mapping.json",
+    "documentsMapping": ""
+  }
+}

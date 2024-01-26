@@ -1,7 +1,7 @@
 {
     "$id": "https://vrijbrp.nl/schemas/vrijbrp.eersteInschrijving.schema.json",
     "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
-    "version": "0.2",
+    "version": "0.2.1",
     "title": "EersteInschrijving",
     "type": "object",
     "properties": {
@@ -15,11 +15,13 @@
             "enum": [
                 "V",
                 "M"
-            ]
+            ],
+            "required": true
         },
         "voornamen": {
             "type": "string",
-            "description": "Voornamen"
+            "description": "Voornamen",
+            "required": true
         },
         "voorvoegsel": {
             "type": "string",
@@ -27,27 +29,36 @@
         },
         "achternaam": {
             "type": "string",
-            "description": "Achternaam"
+            "description": "Achternaam",
+            "required": true
         },
         "geboortedatum": {
             "type": "string",
-            "description": "Geboortedatum"
+            "description": "Geboortedatum",
+            "required": true
         },
         "geboorteplaats": {
             "type": "string",
-            "description": "Geboorteplaats"
+            "description": "Geboorteplaats",
+            "required": true
         },
         "geboorteland": {
             "type": "string",
-            "description": "Geboorteland"
+            "description": "Geboorteland",
+            "required": true
         },
         "land van vorig adres": {
             "type": "string",
             "description": "Land van vorig adres"
         },
+        "land_van_herkomst": {
+          "type": "string",
+          "description": "Land van vorig adres"
+        },
         "e-mail": {
             "type": "string",
-            "description": "E-mail adres"
+            "description": "E-mail adres",
+            "required": true
         },
         "telefoon": {
             "type": "string",
@@ -55,11 +66,13 @@
         },
         "postcode": {
             "type": "string",
-            "description": "Postcode (nieuw adres)"
+            "description": "Postcode (nieuw adres)",
+            "required": true
         },
         "huisnummer": {
             "type": "string",
-            "description": "Huisnummer (nieuw adres)"
+            "description": "Huisnummer (nieuw adres)",
+            "required": true
         },
         "huisletter": {
             "type": "string",
@@ -71,11 +84,13 @@
         },
         "straatnaam": {
             "type": "string",
-            "description": "Straatnaam (nieuw adres)"
+            "description": "Straatnaam (nieuw adres)",
+            "required": true
         },
         "woonplaats": {
             "type": "string",
-            "description": "Woonplaats (nieuw adres)"
+            "description": "Woonplaats (nieuw adres)",
+            "required": true
         },
         "datum ingang bewoning": {
             "type": "string",

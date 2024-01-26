@@ -1,8 +1,8 @@
 <?php
 /**
- * An example handler for the per store.
+ * A ZGW zaak to first registration handler.
  *
- * @author  Conduction.nl <info@conduction.nl>
+ * @author  Conduction.nl <info@conduction.nl>, Sarai Misidjan <sarai@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
@@ -12,7 +12,7 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
 use CommonGateway\FirstRegistrationBundle\Service\FirstRegistrationService;
 
 
-class FirstRegistrationHandler implements ActionHandlerInterface
+class ZGWToFirstRegistrationHandler implements ActionHandlerInterface
 {
 
     /**
@@ -43,35 +43,58 @@ class FirstRegistrationHandler implements ActionHandlerInterface
     public function getConfiguration(): array
     {
         return [
-            '$id'         => 'https://vrijbrp.nl/vrijbrp.zaak.handler.json',
+            '$id'         => 'https://vrijbrp.nl/vrijbrp.zgwToFirstRegistration.handler.json',
             '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
-            'title'       => 'VrijbrpEersteInschrijvingHandler',
+            'title'       => 'ZGWToFirstRegistrationHandler',
             'description' => 'This handler syncs EersteInschrijving to VrijBrp',
             'required'    => [
                 'source',
                 'location',
-                'zaakEntity',
+                'schema',
+                'documentSchema',
+                'valuesMapping',
             ],
             'properties'  => [
-                'source'   => [
+                'source'           => [
                     'type'        => 'string',
                     'description' => 'The location of the Source we will send a request to, location of an existing Source object',
                     'example'     => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
                     'required'    => true,
                     '$ref'        => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
                 ],
-                'location' => [
+                'location'         => [
                     'type'        => 'string',
                     'description' => 'The endpoint we will use on the Source to send a request, just a string',
                     'example'     => '/api/births',
                     'required'    => true,
                 ],
-                'schema'   => [
+                'schema'           => [
                     'type'        => 'string',
                     'description' => 'The reference of the entity we use as trigger for this handler, we need this to find a synchronization object',
                     'example'     => 'https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json',
                     'required'    => true,
                     '$ref'        => 'https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json',
+                ],
+                'documentSchema'   => [
+                    'type'        => 'string',
+                    'description' => 'The reference of the entity we use as trigger for this handler, we need this to find a synchronization object',
+                    'example'     => 'https://vrijbrp.nl/schemas/vrijbrp.document.schema.json',
+                    'required'    => true,
+                    '$ref'        => 'https://vrijbrp.nl/schemas/vrijbrp.document.schema.json',
+                ],
+                'valuesMapping'    => [
+                    'type'        => 'string',
+                    'description' => 'The reference of the mapping we use as trigger for this handler.',
+                    'example'     => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakEigenschapToFirstRegistration.mapping.json',
+                    'required'    => true,
+                    '$ref'        => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakToFirstRegistration.mapping.json',
+                ],
+                'documentsMapping' => [
+                    'type'        => 'string',
+                    'description' => 'The reference of the mapping we use as trigger for this handler.',
+                    'example'     => '',
+                    'required'    => true,
+                    '$ref'        => '',
                 ],
             ],
         ];
@@ -91,7 +114,7 @@ class FirstRegistrationHandler implements ActionHandlerInterface
      */
     public function run(array $data, array $configuration): array
     {
-        return $this->service->firstRegistrationHandler($data, $configuration);
+        return $this->service->zgwToFirstRegistrationHandler($data, $configuration);
 
     }//end run()
 

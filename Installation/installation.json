@@ -1,28 +1,5 @@
 {
     "installationService": "CommonGateway\\FirstRegistrationBundle\\Service\\InstallationService",
-    "actions": {
-        "handlers": [
-            {
-                "reference": "https://vrijbrp.nl/action/vrijbrp.firstRegistration.action.json",
-                "actionHandler": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\FirstRegistrationHandler",
-                "listens": [
-                    "vrijbrp.registration.created"
-                ],
-                "conditions": {
-                  "==": [
-                    {
-                      "var": "method"
-                    },
-                    "POST"
-                  ]
-                },
-                "configuration": {
-                  "location": "/api/v1/dataimport/add"
-                },
-                "version": "0.0.2"
-            }
-        ]
-    },
     "endpoints": {
         "schemas": [
             {

@@ -1,0 +1,28 @@
+{
+  "title": "zgwValuesToFirstRegistration",
+  "$id": "https://vrijbrp.nl/mapping/vrijbrp.zgwValuesToFirstRegistration.mapping.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Mapping.schema.json",
+  "version": "0.0.1",
+  "passTrough": false,
+  "mapping": {
+    "values.referentienummer": "zaak.identificatie",
+    "values.geslacht": "rolValues.betrokkeneIdentificatie.geslachtsaanduiding",
+    "values.voornamen": "rolValues.betrokkeneIdentificatie.voornamen",
+    "values.voorvoegsel": "rolValues.betrokkeneIdentificatie.voorvoegselGeslachtsnaam",
+    "values.achternaam": "rolValues.betrokkeneIdentificatie.geslachtsnaam",
+    "values.geboortedatum": "rolValues.betrokkeneIdentificatie.geboortedatum",
+    "values.geboorteplaats": "zaakEigenschapValues.inp&#46;geboorteplaats",
+    "values.geboorteland": "zaakEigenschapValues.landcode",
+    "values.land van vorig adres": "TODO",
+    "values.e-mail": "zaakEigenschapValues.sub&#46;emailadres",
+    "values.telefoon": "zaakEigenschapValues.telefoonBuitenland",
+    "values.postcode": "zaakEigenschapValues.aoa&#46;postcode",
+    "values.huisnummer": "zaakEigenschapValues.aoa&#46;huisnummer",
+    "values.huisletter": "zaakEigenschapValues.wpl&#46;huisletter",
+    "values.toevoeging": "zaakEigenschapValues.wpl&#46;huisnummertoevoeging",
+    "values.straatnaam": "zaakEigenschapValues.gor&#46;openbareRuimteNaam",
+    "values.woonplaats": "zaakEigenschapValues.wpl&#46;woonplaatsNaam",
+    "values.datum ingang bewoning": "zaakEigenschapValues.datumVerhuizing",
+    "values.opmerkingen": "zaak.toelichting"
+  }
+}
