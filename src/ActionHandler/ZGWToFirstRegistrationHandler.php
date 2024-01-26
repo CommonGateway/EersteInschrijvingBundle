@@ -50,7 +50,9 @@ class ZGWToFirstRegistrationHandler implements ActionHandlerInterface
             'required'    => [
                 'source',
                 'location',
-                'zaakEntity',
+                'schema',
+                'documentSchema',
+                'valuesMapping'
             ],
             'properties'  => [
                 'source'           => [

@@ -45,11 +45,6 @@ class FirstRegistrationService
     private EntityManagerInterface $entityManager;
 
     /**
-     * @var ParameterBagInterface $parameterBag
-     */
-    private ParameterBagInterface $parameterBag;
-
-    /**
      * The Resource service.
      *
      * @var GatewayResourceService $resourceService
@@ -62,13 +57,6 @@ class FirstRegistrationService
      * @var MappingService $mappingService
      */
     private MappingService $mappingService;
-
-    /**
-     * The Synchronization service.
-     *
-     * @var SynchronizationService $syncService
-     */
-    private SynchronizationService $syncService;
 
     /**
      * The Cache service.
@@ -94,29 +82,23 @@ class FirstRegistrationService
 
     /**
      * @param EntityManagerInterface $entityManager       The Entity Manager.
-     * @param ParameterBagInterface  $parameterBag        The Parameter Bag Interface
      * @param GatewayResourceService $resourceService     The Gateway Resource Service.
      * @param MappingService         $mappingService      The Mapping Service
-     * @param SynchronizationService $syncService         The Synchronization Service.
      * @param CacheService           $cacheService        The Cache Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
      * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
     public function __construct(
         EntityManagerInterface $entityManager,
-        ParameterBagInterface $parameterBag,
         GatewayResourceService $resourceService,
         MappingService $mappingService,
-        SynchronizationService $syncService,
         CacheService $cacheService,
         ZgwToVrijbrpService $zgwToVrijbrpService,
         LoggerInterface $pluginLogger
     ) {
         $this->entityManager       = $entityManager;
-        $this->parameterBag        = $parameterBag;
         $this->resourceService     = $resourceService;
         $this->mappingService      = $mappingService;
-        $this->syncService         = $syncService;
         $this->cacheService        = $cacheService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
         $this->logger              = $pluginLogger;
