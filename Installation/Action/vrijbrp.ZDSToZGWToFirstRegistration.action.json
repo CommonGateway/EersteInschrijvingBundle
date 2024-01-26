@@ -8,9 +8,35 @@
   ],
   "throws": [],
   "conditions": {
-    "==": [
-      1,
-      1
+    "and": [
+      {
+        "==": [
+          {
+            "var": "documents.0.informatieobject.informatieobjecttype.omschrijving"
+          },
+          "Aanvraag"
+        ]
+      },
+      {
+        "or": [
+          {
+            "==": [
+              {
+                "var": "documents.0.zaak.zaaktype.identificatie"
+              },
+              "B333"
+            ]
+          },
+          {
+            "==": [
+              {
+                "var": "documents.0.zaak.zaaktype.identificatie"
+              },
+              "B334"
+            ]
+          }
+        ]
+      }
     ]
   },
   "class": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\ZGWToFirstRegistrationHandler",
