@@ -1,0 +1,36 @@
+{
+  "title": "ZDSToZGWToFile",
+  "$id": "https://vrijbrp.nl/action/vrijbrp.ZDSToZGWToFile.action.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Action.schema.json",
+  "version": "0.0.1",
+  "listens": [
+    "vrijbrp.document.created"
+  ],
+  "throws": [
+    "zgw.file.created"
+  ],
+  "conditions": {
+    "or": [
+      {
+        "==": [
+          {
+            "var": "documents.0.zaak.zaaktype.identificatie"
+          },
+          "B333"
+        ]
+      },
+      {
+        "==": [
+          {
+            "var": "documents.0.zaak.zaaktype.identificatie"
+          },
+          "B334"
+        ]
+      }
+    ]
+  },
+  "class": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\ZGWDocumentToFileHandler",
+  "configuration": {
+    "endpoint": "https://vng.opencatalogi.nl/endpoints/drc.downloadEnkelvoudigInformatieObject.endpoint.json"
+  }
+}
