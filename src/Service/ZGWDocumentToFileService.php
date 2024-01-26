@@ -98,7 +98,7 @@ class ZGWDocumentToFileService
      * @param GatewayResourceService $resourceService     The Gateway Resource Service.
      * @param MappingService         $mappingService      The Mapping Service
      * @param SynchronizationService $syncService         The Synchronization Service.
-     * @param CacheService $cacheService The Cache Service.
+     * @param CacheService           $cacheService        The Cache Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
      * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
@@ -117,7 +117,7 @@ class ZGWDocumentToFileService
         $this->resourceService     = $resourceService;
         $this->mappingService      = $mappingService;
         $this->syncService         = $syncService;
-        $this->cacheService = $cacheService;
+        $this->cacheService        = $cacheService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
         $this->logger              = $pluginLogger;
         $this->configuration       = [];
@@ -369,7 +369,7 @@ class ZGWDocumentToFileService
         }
 
         // Get the document object.
-        $informatieobject         = $this->entityManager->getRepository('App:ObjectEntity')->find($documenten[0]['_self']['id']);
+        $informatieobject = $this->entityManager->getRepository('App:ObjectEntity')->find($documenten[0]['_self']['id']);
         $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => $this->configuration['endpoint']]);
         if ($informatieobject instanceof ObjectEntity === false || $downloadEndpoint instanceof Endpoint === false) {
             return $this->data;
