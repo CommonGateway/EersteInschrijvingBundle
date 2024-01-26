@@ -1,10 +1,4 @@
 <?php
-/**
- * An example service for adding business logic to your class.
- *
- * @author  Conduction.nl <info@conduction.nl>
- * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
- */
 
 namespace CommonGateway\FirstRegistrationBundle\Service;
 
@@ -26,6 +20,12 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\Valid;
 
+/**
+ * An example service for adding business logic to your class.
+ *
+ * @author  Conduction.nl <info@conduction.nl>
+ * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+ */
 class ZGWDocumentToFileService
 {
 
