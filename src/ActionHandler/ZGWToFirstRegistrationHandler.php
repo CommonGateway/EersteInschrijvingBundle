@@ -52,7 +52,7 @@ class ZGWToFirstRegistrationHandler implements ActionHandlerInterface
                 'location',
                 'schema',
                 'documentSchema',
-                'valuesMapping'
+                'valuesMapping',
             ],
             'properties'  => [
                 'source'           => [
