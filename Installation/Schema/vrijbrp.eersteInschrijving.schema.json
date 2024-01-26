@@ -1,7 +1,7 @@
 {
     "$id": "https://vrijbrp.nl/schemas/vrijbrp.eersteInschrijving.schema.json",
     "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
-    "version": "0.2",
+    "version": "0.2.1",
     "title": "EersteInschrijving",
     "type": "object",
     "properties": {
@@ -50,6 +50,10 @@
         "land van vorig adres": {
             "type": "string",
             "description": "Land van vorig adres"
+        },
+        "land_van_herkomst": {
+          "type": "string",
+          "description": "Land van vorig adres"
         },
         "e-mail": {
             "type": "string",

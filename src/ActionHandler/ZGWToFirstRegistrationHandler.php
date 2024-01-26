@@ -83,9 +83,9 @@ class ZGWToFirstRegistrationHandler implements ActionHandlerInterface
                 'valuesMapping' => [
                     'type'        => 'string',
                     'description' => 'The reference of the mapping we use as trigger for this handler.',
-                    'example'     => 'https://vrijbrp.nl/mapping/vrijbrp.zgwValuesToFirstRegistration.mapping.json',
+                    'example'     => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakEigenschapToFirstRegistration.mapping.json',
                     'required'    => true,
-                    '$ref'        => 'https://vrijbrp.nl/mapping/vrijbrp.zgwValuesToFirstRegistration.mapping.json',
+                    '$ref'        => 'https://vrijbrp.nl/mapping/vrijbrp.zgwZaakToFirstRegistration.mapping.json',
                 ],
                 'documentsMapping' => [
                     'type'        => 'string',
