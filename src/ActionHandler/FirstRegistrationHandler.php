@@ -53,20 +53,20 @@ class FirstRegistrationHandler implements ActionHandlerInterface
                 'zaakEntity',
             ],
             'properties'  => [
-                'source'                => [
+                'source'   => [
                     'type'        => 'string',
                     'description' => 'The location of the Source we will send a request to, location of an existing Source object',
                     'example'     => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
                     'required'    => true,
                     '$ref'        => 'https://vrijbrp.nl/source/vrijbrp.dossiers.source.json',
                 ],
-                'location'              => [
+                'location' => [
                     'type'        => 'string',
                     'description' => 'The endpoint we will use on the Source to send a request, just a string',
                     'example'     => '/api/births',
                     'required'    => true,
                 ],
-                'schema' => [
+                'schema'   => [
                     'type'        => 'string',
                     'description' => 'The reference of the entity we use as trigger for this handler, we need this to find a synchronization object',
                     'example'     => 'https://vrijbrp.nl/schemas/vrijbrp.dataImport.schema.json',

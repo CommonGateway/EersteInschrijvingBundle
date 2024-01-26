@@ -94,11 +94,11 @@ class FirstRegistrationService
 
     /**
      * @param EntityManagerInterface $entityManager       The Entity Manager.
-     * @param ParameterBagInterface $parameterBag The Parameter Bag Interface
+     * @param ParameterBagInterface  $parameterBag        The Parameter Bag Interface
      * @param GatewayResourceService $resourceService     The Gateway Resource Service.
-     * @param MappingService $mappingService The Mapping Service
-     * @param SynchronizationService $syncService The Synchronization Service.
-     * @param CacheService $cacheService The Cache Service.
+     * @param MappingService         $mappingService      The Mapping Service
+     * @param SynchronizationService $syncService         The Synchronization Service.
+     * @param CacheService           $cacheService        The Cache Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
      * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
@@ -113,11 +113,11 @@ class FirstRegistrationService
         LoggerInterface $pluginLogger
     ) {
         $this->entityManager       = $entityManager;
-        $this->parameterBag = $parameterBag;
+        $this->parameterBag        = $parameterBag;
         $this->resourceService     = $resourceService;
-        $this->mappingService = $mappingService;
-        $this->syncService = $syncService;
-        $this->cacheService = $cacheService;
+        $this->mappingService      = $mappingService;
+        $this->syncService         = $syncService;
+        $this->cacheService        = $cacheService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
         $this->logger              = $pluginLogger;
         $this->configuration       = [];
@@ -149,6 +149,7 @@ class FirstRegistrationService
 
     }//end removeSelf()
 
+
     /**
      * Gets the zaaktype object from the zaak.
      *
@@ -178,13 +179,15 @@ class FirstRegistrationService
         }
 
         return $zaaktypeObject;
-    }
+
+    }//end getZaaktype()
+
 
     /**
      * Gets the values from the zaakEigenschappen of the zaak.
      *
      * @param ObjectEntity $zaaktypeObject The zaaktype object of the zaak.
-     * @param ObjectEntity $zaakObject The zaak object.
+     * @param ObjectEntity $zaakObject     The zaak object.
      *
      * @return array The values of the zaakEigenschappen.
      */
@@ -197,13 +200,12 @@ class FirstRegistrationService
         }
 
         $zaakEigenschapValues = [];
-        $countLandcode = 0;
+        $countLandcode        = 0;
         // Loop through the zaakEigenschappen. This is needed to fill the values of the importRecord.schema.json.
         foreach ($zaakObject->getValue('eigenschappen') as $zaakEigenschap) {
-
             // If the zaakEigenschap is oneOf the eigenschappen from the zaaktype then add it to the array.
             // Don't do anything if the zaakeigenschap is a landcode.
-            if (in_array($zaakEigenschap->getValue('naam'), $eigenschapNames) === true && $zaakEigenschap->getValue('naam') !== 'landcode'){
+            if (in_array($zaakEigenschap->getValue('naam'), $eigenschapNames) === true && $zaakEigenschap->getValue('naam') !== 'landcode') {
                 $zaakEigenschapValues[$zaakEigenschap->getValue('naam')] = $zaakEigenschap->getValue('waarde');
 
                 continue;
@@ -211,8 +213,7 @@ class FirstRegistrationService
 
             // If the zaakEigenschap is oneOf the eigenschappen from the zaaktype and the name is landcode.
             // Set the countLandcode with +1 and set the right key.
-            if (in_array($zaakEigenschap->getValue('naam'), $eigenschapNames) === true && $zaakEigenschap->getValue('naam') === 'landcode'){
-
+            if (in_array($zaakEigenschap->getValue('naam'), $eigenschapNames) === true && $zaakEigenschap->getValue('naam') === 'landcode') {
                 if ($countLandcode === 0) {
                     $zaakEigenschapValues['geboorteland'] = $zaakEigenschap->getValue('waarde');
                 }
@@ -223,16 +224,18 @@ class FirstRegistrationService
 
                 $countLandcode++;
             }
-        }
+        }//end foreach
 
         return $zaakEigenschapValues;
-    }
+
+    }//end getZaakEigenschappenValues()
+
 
     /**
      * Gets the values from the zaakEigenschappen of the zaak.
      *
      * @param ObjectEntity $zaaktypeObject The zaaktype object of the zaak.
-     * @param ObjectEntity $zaakObject The zaak object.
+     * @param ObjectEntity $zaakObject     The zaak object.
      *
      * @return array The values of the zaakEigenschappen.
      */
@@ -241,7 +244,6 @@ class FirstRegistrationService
         // TODO: is it always a natuurlijk persoon? Set roltype to test zaaktype.
         $roltypeUrl = null;
         foreach ($zaaktypeObject->getValue('roltypen') as $roltype) {
-
             // If the omschrijvingGeneriek is initiator then set the roltype.
             if ($roltype->getValue('omschrijvingGeneriek') === 'initiator') {
                 $roltypeUrl = $roltype->getValue('url');
@@ -257,7 +259,9 @@ class FirstRegistrationService
         }
 
         return [];
-    }
+
+    }//end getRolValues()
+
 
     /**
      * A first registration handler that is triggered by an action.
@@ -299,9 +303,8 @@ class FirstRegistrationService
         }
 
         // Get the document object.
-        $zaakObject         = $this->entityManager->getRepository('App:ObjectEntity')->find($zaken[0]['_self']['id']);
+        $zaakObject = $this->entityManager->getRepository('App:ObjectEntity')->find($zaken[0]['_self']['id']);
         if ($zaakObject instanceof ObjectEntity === false) {
-
             return $this->data;
         }
 
@@ -309,8 +312,8 @@ class FirstRegistrationService
 
         // Get the zaakEigenschap and rol values of the zaak.
         $values['zaakEigenschapValues'] = $this->getZaakEigenschappenValues($zaaktypeObject, $zaakObject);
-        $values['rolValues'] = $this->getRolValues($zaaktypeObject, $zaakObject);
-        $values['zaak'] = $zaakObject->toArray();
+        $values['rolValues']            = $this->getRolValues($zaaktypeObject, $zaakObject);
+        $values['zaak']                 = $zaakObject->toArray();
 
         // Get the value mapping object.
         $valueMapping = $this->resourceService->getMapping($this->configuration['valuesMapping'], 'common-gateway/first-registration-bundle');
@@ -329,7 +332,6 @@ class FirstRegistrationService
         // Loop through the
         $documents = [];
         foreach ($zaakObject->getValue('zaakinformatieobjecten') as $zaakInfoObject) {
-
             $informatieObject = $zaakInfoObject->getValue('informatieobject');
 
             if ($informatieObject->getValueObject('inhoud') !== false && $informatieObject->getValueObject('inhoud')->getFiles()->count() > 0) {
@@ -342,9 +344,9 @@ class FirstRegistrationService
             }
 
             $documents['documents'][] = [
-                'title' => $file->getName(),
+                'title'    => $file->getName(),
                 'filename' => $file->getName(),
-                'content' => $file->getBase64()
+                'content'  => $file->getBase64(),
             ];
         }
 
@@ -355,7 +357,6 @@ class FirstRegistrationService
         $dataImportArray['records'][] = $mappingArray;
 
         // TODO: Get naam and type of the dataImport.
-
         // Create and hydrate the dataImport object.
         $dataImport = new ObjectEntity($dataImportSchema);
         $dataImport->hydrate($dataImportArray);
@@ -364,7 +365,9 @@ class FirstRegistrationService
         $this->entityManager->flush();
 
         return $this->sendFirstRegistration($dataImport);
-    }//end firstRegistrationHandler
+
+    }//end zgwToFirstRegistrationHandler()
+
 
     /**
      * A first registration handler that is triggered by an action.
@@ -376,8 +379,8 @@ class FirstRegistrationService
      */
     public function sendFirstRegistration(ObjectEntity $object): array
     {
-        $source                = $this->resourceService->getSource($this->configuration['source'], 'common-gateway/first-registration-bundle');
-        $schema                = $this->resourceService->getSchema($this->configuration['schema'], 'common-gateway/first-registration-bundle');
+        $source = $this->resourceService->getSource($this->configuration['source'], 'common-gateway/first-registration-bundle');
+        $schema = $this->resourceService->getSchema($this->configuration['schema'], 'common-gateway/first-registration-bundle');
 
         if ($source === null || $schema === null) {
             return [];
@@ -398,15 +401,14 @@ class FirstRegistrationService
         // Todo: temp way of doing this without updated synchronize() function...
         if ($data = $this->zgwToVrijbrpService->synchronizeTemp($synchronization, $objectArray, $this->configuration['location'])) {
             // Return empty array on error for when we got here through a command.
-
             $this->data['response'] = new Response(\Safe\json_encode($data), 201, ['content-type' => 'application/json']);
 
             return $this->data;
         }
 
         return $this->data;
-    }
 
+    }//end sendFirstRegistration()
 
 
     /**
@@ -432,6 +434,8 @@ class FirstRegistrationService
         }
 
         return $this->sendFirstRegistration($object);
+
     }//end firstRegistrationHandler()
+
 
 }//end class
