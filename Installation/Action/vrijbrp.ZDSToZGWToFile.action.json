@@ -10,9 +10,23 @@
     "zgw.file.created"
   ],
   "conditions": {
-    "==": [
-      1,
-      1
+    "or": [
+      {
+        "==": [
+          {
+            "var": "documents.0.zaak.zaaktype.identificatie"
+          },
+          "B333"
+        ]
+      },
+      {
+        "==": [
+          {
+            "var": "documents.0.zaak.zaaktype.identificatie"
+          },
+          "B334"
+        ]
+      }
     ]
   },
   "class": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\ZGWDocumentToFileHandler",
