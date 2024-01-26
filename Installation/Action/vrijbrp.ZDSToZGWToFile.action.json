@@ -6,25 +6,13 @@
   "listens": [
     "vrijbrp.document.created"
   ],
-  "throws": [],
+  "throws": [
+    "zgw.file.created"
+  ],
   "conditions": {
-    "or" : [
-      {
-        "==": [
-          {
-            "var": "objects.document.zaak.zaaktype.identificatie"
-          },
-          "B333"
-        ]
-      },
-      {
-        "==": [
-          {
-            "var": "objects.document.zaak.zaaktype.identificatie"
-          },
-          "B334"
-        ]
-      }
+    "==": [
+      1,
+      1
     ]
   },
   "class": "CommonGateway\\FirstRegistrationBundle\\ActionHandler\\ZGWDocumentToFileHandler",

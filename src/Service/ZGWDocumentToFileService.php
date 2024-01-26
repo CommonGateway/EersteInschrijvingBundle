@@ -14,6 +14,7 @@ use App\Entity\Gateway as Source;
 use App\Entity\Mapping;
 use App\Entity\ObjectEntity;
 use App\Entity\File;
+use CommonGateway\CoreBundle\Service\CacheService;
 use CommonGateway\CoreBundle\Service\MappingService;
 use CommonGateway\CoreBundle\Service\SynchronizationService;
 use CommonGateway\GeboorteVrijBRPBundle\Service\ZgwToVrijbrpService;
@@ -70,6 +71,13 @@ class ZGWDocumentToFileService
     private SynchronizationService $syncService;
 
     /**
+     * The Cache service.
+     *
+     * @var CacheService $cacheService
+     */
+    private CacheService $cacheService;
+
+    /**
      * The ZGW To VrijBRP service.
      *
      * @var ZgwToVrijbrpService $zgwToVrijbrpService
@@ -90,6 +98,7 @@ class ZGWDocumentToFileService
      * @param GatewayResourceService $resourceService     The Gateway Resource Service.
      * @param MappingService         $mappingService      The Mapping Service
      * @param SynchronizationService $syncService         The Synchronization Service.
+     * @param CacheService $cacheService The Cache Service.
      * @param ZgwToVrijbrpService    $zgwToVrijbrpService The ZGW To VrijBRP Service
      * @param LoggerInterface        $pluginLogger        The plugin version of the logger interface.
      */
@@ -99,6 +108,7 @@ class ZGWDocumentToFileService
         GatewayResourceService $resourceService,
         MappingService $mappingService,
         SynchronizationService $syncService,
+        CacheService $cacheService,
         ZgwToVrijbrpService $zgwToVrijbrpService,
         LoggerInterface $pluginLogger
     ) {
@@ -107,6 +117,7 @@ class ZGWDocumentToFileService
         $this->resourceService     = $resourceService;
         $this->mappingService      = $mappingService;
         $this->syncService         = $syncService;
+        $this->cacheService = $cacheService;
         $this->zgwToVrijbrpService = $zgwToVrijbrpService;
         $this->logger              = $pluginLogger;
         $this->configuration       = [];
@@ -332,17 +343,38 @@ class ZGWDocumentToFileService
         $this->configuration = $configuration;
         $this->data          = $data;
 
-        // Get the document in the objects from the action data.
-        $response = $this->data['objects']['document'];
-
-        // Get the zaak object.
-        $document         = $this->entityManager->getRepository('App:ObjectEntity')->find($response['_self']['id']);
-        $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => $this->configuration['endpoint']]);
-        if ($document instanceof ObjectEntity === false || $downloadEndpoint instanceof Endpoint === false) {
+        $schema = $this->resourceService->getSchema('https://vng.opencatalogi.nl/schemas/drc.enkelvoudigInformatieObject.schema.json', 'common-gateway/zds-to-zgw-bundle');
+        if ($schema === null) {
             return $this->data;
         }
 
-        $informatieobject = $document->getValue('informatieobject');
+        // Get the informatieobject identification property.
+        $identification = $this->data['body']['SOAP-ENV:Body']['ns2:edcLk01']['ns2:object']['ns2:identificatie'];
+
+        // Search enkelvoudiginformatieobject objects with the identificatie in informatieobject identificatie.
+        $documenten = $this->cacheService->searchObjects(null, ['identificatie' => $identification], [$schema->getId()->toString()])['results'];
+
+        // Create error response if the document is not empty and if there is more then one result.
+        if (empty($documenten) === false && count($documenten) > 1) {
+            $this->logger->warning('More than one document exists with id '.$zaakDocumentArray['informatieobject']['identificatie']);
+
+            return $this->data;
+        }
+
+        // Create error response if the document is empty.
+        if (empty($documenten) === true) {
+            $this->logger->warning('The document with id '.$zaakDocumentArray['informatieobject']['identificatie'].' does not exist');
+
+            return $this->data;
+        }
+
+        // Get the document object.
+        $informatieobject         = $this->entityManager->getRepository('App:ObjectEntity')->find($documenten[0]['_self']['id']);
+        $downloadEndpoint = $this->entityManager->getRepository('App:Endpoint')->findOneBy(['reference' => $this->configuration['endpoint']]);
+        if ($informatieobject instanceof ObjectEntity === false || $downloadEndpoint instanceof Endpoint === false) {
+            return $this->data;
+        }
+
         $this->createOrUpdateFile($informatieobject, $informatieobject->toArray(), $downloadEndpoint, false);
 
         return $this->data;
