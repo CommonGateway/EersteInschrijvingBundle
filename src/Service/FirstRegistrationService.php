@@ -335,6 +335,9 @@ class FirstRegistrationService
         // Merge the values and documents array.
         $mappingArray = array_merge($valuesArray, $documents);
 
+        $dataImportArray['name'] = 'Eerste Inschrijving ZDS';
+        $dataImportArray['type'] = 'first_registrants_2022';
+
         // Create the dataImport array.
         $dataImportArray['records'][] = $mappingArray;
 
