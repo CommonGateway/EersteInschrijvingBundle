@@ -335,11 +335,12 @@ class FirstRegistrationService
         // Merge the values and documents array.
         $mappingArray = array_merge($valuesArray, $documents);
 
-        if($zaakObject->getValue('zaaktype')->getValue('identificatie') === 'B334') {
+        if ($zaakObject->getValue('zaaktype')->getValue('identificatie') === 'B334') {
             $dataImportArray['name'] = 'Eerste Inschrijving Expat ZDS';
         } else {
             $dataImportArray['name'] = 'Eerste Inschrijving ZDS';
         }
+
         $dataImportArray['type'] = 'first_registrants_2022';
 
         // Create the dataImport array.
