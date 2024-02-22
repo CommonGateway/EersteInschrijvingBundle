@@ -305,7 +305,7 @@ class ZGWDocumentToFileService
         }
 
         if ((($data['inhoud'] === null || filter_var($data['inhoud'], FILTER_VALIDATE_URL) === $data['inhoud'])
-                && ($data['link'] === null || $data['link'] === ''))
+            && ($data['link'] === null || $data['link'] === ''))
             && isset($this->data['body']['bestandsomvang']) === true
         ) {
             // Creates a file part for the file.
