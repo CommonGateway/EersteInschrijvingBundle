@@ -314,7 +314,7 @@ class ZGWDocumentToFileService
 
         $file->setValue($objectEntity->getValueObject('inhoud'));
         $this->entityManager->persist($file);
-        $objectEntity->hydrate(['inhoud' => $this->generateDownloadEndpoint($objectEntity->getId()->toString(), $downloadEndpoint)]);
+        $objectEntity->getValueObject('inhoud')->addFile($file)->setStringValue($this->generateDownloadEndpoint($objectEntity->getId()->toString(), $downloadEndpoint));
         $this->entityManager->persist($objectEntity);
         $this->entityManager->flush();
 

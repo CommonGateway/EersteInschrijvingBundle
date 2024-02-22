@@ -312,8 +312,11 @@ class FirstRegistrationService
         }
 
         // Loop through the
-        $documents = [];
-        foreach ($zaakObject->getValue('zaakinformatieobjecten') as $zaakInfoObject) {
+        $documents              = [];
+        $zaakInformatieObjecten = $this->cacheService->searchObjects(null, ['embedded.zaak.identificatie' => $identification], ['https://vng.opencatalogi.nl/schemas/zrc.zaakInformatieObject.schema.json'])['results'];
+
+        foreach ($zaakInformatieObjecten as $zaakInfoArray) {
+            $zaakInfoObject   = $this->entityManager->getRepository(ObjectEntity::class)->find($zaakInfoArray['_id']);
             $informatieObject = $zaakInfoObject->getValue('informatieobject');
 
             if ($informatieObject->getValueObject('inhoud') !== false && $informatieObject->getValueObject('inhoud')->getFiles()->count() > 0) {
