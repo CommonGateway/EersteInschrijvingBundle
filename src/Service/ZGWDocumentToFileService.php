@@ -305,7 +305,7 @@ class ZGWDocumentToFileService
         }
 
         if ((($data['inhoud'] === null || filter_var($data['inhoud'], FILTER_VALIDATE_URL) === $data['inhoud'])
-            && ($data['link'] === null || $data['link'] === ''))
+                && ($data['link'] === null || $data['link'] === ''))
             && isset($this->data['body']['bestandsomvang']) === true
         ) {
             // Creates a file part for the file.
@@ -314,7 +314,7 @@ class ZGWDocumentToFileService
 
         $file->setValue($objectEntity->getValueObject('inhoud'));
         $this->entityManager->persist($file);
-        $objectEntity->hydrate(['inhoud' => $this->generateDownloadEndpoint($objectEntity->getId()->toString(), $downloadEndpoint)]);
+        $objectEntity->getValueObject('inhoud')->addFile($file)->setStringValue($this->generateDownloadEndpoint($objectEntity->getId()->toString(), $downloadEndpoint));
         $this->entityManager->persist($objectEntity);
         $this->entityManager->flush();
 

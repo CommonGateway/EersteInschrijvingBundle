@@ -313,7 +313,7 @@ class FirstRegistrationService
 
         // Loop through the
         $documents              = [];
-        $zaakInfoObjectSchema   = $this->resourceService->getSchema('https://vng.opencatalogi.nl/schemas/zrc.zaak.schema.json', 'common-gateway/zds-to-zgw-bundle');
+        $zaakInfoObjectSchema   = $this->resourceService->getSchema('https://vng.opencatalogi.nl/schemas/zrc.zaakInformatieObject.schema.json', 'common-gateway/zds-to-zgw-bundle');
         $zaakInformatieObjecten = $this->cacheService->searchObjects(null, ['embedded.zaak.identificatie' => $identification], [$zaakInfoObjectSchema->getId()->toString()])['results'];
 
         foreach ($zaakInformatieObjecten as $zaakInfoArray) {
