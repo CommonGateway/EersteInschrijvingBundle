@@ -324,14 +324,14 @@ class FirstRegistrationService
                 $file = $informatieObject->getValueObject('inhoud')->getFiles()->first();
             }
 
-            if (isset($file) === false) {
+            if (isset($file) === false || $file instanceof File === false) {
                 continue;
             }
 
             $documents['documents'][] = [
                 'title'    => $file->getName(),
                 'filename' => $file->getName(),
-                'content'  => $file->getBase64(),
+                'content'  => $file,
             ];
         }
 
@@ -363,6 +363,25 @@ class FirstRegistrationService
 
 
     /**
+     * Splices in the base64 of the documents from the file object.
+     *
+     * @param  array $record The record to update
+     * @return array The updated record
+     */
+    private function fetchDocuments(array $record): array
+    {
+        foreach ($record['documents'] as $key => $document) {
+            if ($document['content'] instanceof File) {
+                $record['documents'][$key]['content'] = $document['content']->getBase64();
+            }
+        }
+
+        return $record;
+
+    }//end fetchDocuments()
+
+
+    /**
      * A first registration handler that is triggered by an action.
      *
      * @param array $data          The data array
@@ -383,6 +402,10 @@ class FirstRegistrationService
 
         $objectArray = $object->toArray();
         $objectArray = $this->removeSelf($objectArray);
+
+        foreach ($objectArray['records'] as $key => $record) {
+            $objectArray['records'][$key] = $this->fetchDocuments($record);
+        }
 
         // @TODO $objectArray unset _self etc..
         // Create synchronization.
