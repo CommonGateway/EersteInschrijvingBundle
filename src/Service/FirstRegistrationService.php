@@ -370,12 +370,13 @@ class FirstRegistrationService
      */
     private function fetchDocuments(array $record): array
     {
-        foreach($record['documents'] as $key => $document) {
+        foreach ($record['documents'] as $key => $document) {
             $content = $document['content'];
-            if(Uuid::isValid($content) === true) {
+            if (Uuid::isValid($content) === true) {
                 $content = $this->entityManager->getRepository(File::class)->find($content);
             }
-            if($content instanceof File) {
+
+            if ($content instanceof File) {
                 $record['documents'][$key]['content'] = $content->getBase64();
             }
         }
