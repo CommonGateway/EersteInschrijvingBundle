@@ -352,7 +352,7 @@ class ZGWDocumentToFileService
         $identification = $this->data['body']['SOAP-ENV:Body']['ns2:edcLk01']['ns2:object']['ns2:identificatie'];
 
         // Search enkelvoudiginformatieobject objects with the identificatie in informatieobject identificatie.
-        $documenten = $this->cacheService->searchObjects(null, ['identificatie' => $identification], [$schema->getId()->toString()])['results'];
+        $documenten = $this->cacheService->searchObjects(['identificatie' => $identification], [$schema->getId()->toString()])['results'];
 
         // Create error response if the document is not empty and if there is more then one result.
         if (empty($documenten) === false && count($documenten) > 1) {

@@ -268,7 +268,7 @@ class FirstRegistrationService
         $identification = $this->data['body']['SOAP-ENV:Body']['ns2:edcLk01']['ns2:object']['ns2:isRelevantVoor']['ns2:gerelateerde']['ns2:identificatie'];
 
         // Search zaak objects with the identification.
-        $zaken = $this->cacheService->searchObjects(null, ['identificatie' => $identification], [$schema->getId()->toString()])['results'];
+        $zaken = $this->cacheService->searchObjects(['identificatie' => $identification], [$schema->getId()->toString()])['results'];
 
         // Create error response if the document is not empty and if there is more then one result.
         if (empty($zaken) === false && count($zaken) > 1) {
@@ -313,7 +313,7 @@ class FirstRegistrationService
 
         // Loop through the
         $documents              = [];
-        $zaakInformatieObjecten = $this->cacheService->searchObjects(null, ['embedded.zaak.identificatie' => $identification], ['https://vng.opencatalogi.nl/schemas/zrc.zaakInformatieObject.schema.json'])['results'];
+        $zaakInformatieObjecten = $this->cacheService->searchObjects(['embedded.zaak.identificatie' => $identification], ['https://vng.opencatalogi.nl/schemas/zrc.zaakInformatieObject.schema.json'])['results'];
 
         foreach ($zaakInformatieObjecten as $zaakInfoArray) {
             $zaakInfoObject   = $this->entityManager->getRepository(ObjectEntity::class)->find($zaakInfoArray['_id']);
